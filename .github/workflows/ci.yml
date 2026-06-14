@@ -43,11 +43,11 @@ jobs:
           rsync -av \
             --exclude='solution.answer.js' \
             --exclude='node_modules' \
+            --exclude='package-lock.json' \
             --exclude='.git' \
             . /tmp/deploy/
 
           git fetch origin main
-          git clean -fd
           git checkout -f main
 
           git rm -rf . || true
