@@ -32,23 +32,15 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Deploy to main (without solution files)
+      - name: Deploy to main
         if: success() && github.ref == 'refs/heads/source'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
           git fetch origin main
-
-          # Удаляем package-lock.json который создал npm install
           rm -f package-lock.json
-
-          # Переключаемся на main
           git checkout -f main
-
-          # Берём все файлы из source кроме ненужных
           git checkout source -- README.md package.json solution.js solution.test.js .github/workflows/ci.yml
-
           git add -A
           git diff --staged --quiet || git commit -m "Deploy from source [skip ci]"
           git push origin main
