@@ -2,7 +2,7 @@
 
 ![Tests](https://github.com/mora-of-crims/array-methods-assignment/actions/workflows/ci.yml/badge.svg?branch=source)
 
-## Задание
+## Задание 
 
 Реализуйте три функции в файле `solution.js`:
 
