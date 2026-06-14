@@ -47,6 +47,7 @@ jobs:
             . /tmp/deploy/
 
           git fetch origin main
+          git clean -fd
           git checkout -f main
 
           git rm -rf . || true
