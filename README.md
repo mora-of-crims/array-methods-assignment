@@ -1,7 +1,5 @@
 # Array Methods Assignment
 
-![Tests](../../actions/workflows/ci.yml/badge.svg?branch=source)
-
 ## Задание
 
 Реализуйте три функции в файле `solution.js`:
