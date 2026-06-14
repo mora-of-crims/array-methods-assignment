@@ -1,17 +1,11 @@
-// TODO: Реализуйте функцию filterEven
-// Принимает массив чисел, возвращает только чётные числа
 export function filterEven(arr) {
-  throw new Error('Not implemented');
+  return arr.filter(n => n % 2 === 0);
 }
 
-// TODO: Реализуйте функцию doubleAll
-// Принимает массив чисел, возвращает массив с каждым числом × 2
 export function doubleAll(arr) {
-  throw new Error('Not implemented');
+  return arr.map(n => n * 2);
 }
 
-// TODO: Реализуйте функцию sum
-// Принимает массив чисел, возвращает их сумму
 export function sum(arr) {
-  throw new Error('Not implemented');
+  return arr.reduce((acc, n) => acc + n, 0);
 }
