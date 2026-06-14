@@ -1,0 +1,62 @@
+name: Tests & Deploy to Main
+
+on:
+  push:
+    branches:
+      - source
+  pull_request:
+    branches:
+      - source
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout source branch
+        uses: actions/checkout@v4
+        with:
+          ref: source
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      # Этот шаг выполняется ТОЛЬКО если тесты прошли успешно
+      - name: Deploy to main (without solution files)
+        if: success() && github.ref == 'refs/heads/source'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Копируем нужные файлы во временную папку
+          mkdir /tmp/deploy
+
+          # Копируем всё, кроме solution.answer.js и node_modules
+          rsync -av \
+            --exclude='solution.answer.js' \
+            --exclude='node_modules' \
+            --exclude='.git' \
+            . /tmp/deploy/
+
+          # Переключаемся на main
+          git checkout main
+
+          # Очищаем main и копируем файлы из временной папки
+          git rm -rf . || true
+          rsync -av /tmp/deploy/ .
+
+          # Коммитим и пушим
+          git add -A
+          git diff --staged --quiet || git commit -m "Deploy from source [skip ci]"
+          git push origin main
