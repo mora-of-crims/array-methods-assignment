@@ -1,0 +1,9 @@
+{
+  "name": "array-methods-assignment",
+  "version": "1.0.0",
+  "description": "Assignment: implement array utility functions",
+  "scripts": {
+    "test": "node --test"
+  },
+  "type": "module"
+}
