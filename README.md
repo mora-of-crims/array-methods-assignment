@@ -1,4 +1,4 @@
-# Array Methods Assignment
+# Array Methods Assignment 
 
 ![Tests](https://github.com/mora-of-crims/array-methods-assignment/actions/workflows/ci.yml/badge.svg?branch=source)
 
